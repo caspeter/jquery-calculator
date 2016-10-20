@@ -6,30 +6,30 @@ $(document).ready(function() {
         var screenText = $('#screen');
         var oldText = screenText.text();
 
-        if (eventText === 'C' || eventText === '=' || eventText === '÷' || eventText === 'x') {
-            if (eventText === '=') {
-                var first = oldText.slice(0, 1)
-                if (isNaN(first)) {
-                    console.log('number');
-                } else {
-                    $(screenText).text(eval(oldText));
-                }
+        if (eventText === '=') {
+            var first = oldText.slice(0, 1)
+            if (isNaN(first)) {
+                $(screenText).text('ERROR')
             }
-            if (eventText === 'C') {
-                $(screenText).text('')
+            else if (eval(oldText) === Infinity || eval(oldText) === -Infinity) {
+              // console.log('hi');
+              $(screenText).text('ERROR')
             }
-            if (eventText === '÷') {
-                $(screenText).text(oldText + '/');
+            else {
+                $(screenText).text(eval(oldText));
             }
-            if (eventText === 'x') {
-                $(screenText).text(oldText + '*');
-            }
+        } else if (eventText === 'C') {
+            $(screenText).text('')
+        } else if (eventText === '÷') {
+            $(screenText).text(oldText + '/');
+        } else if (eventText === 'x') {
+            $(screenText).text(oldText + '*');
         } else {
             // if (last key === '=') {
             //   $(screenText).text('')
             // }
             $(screenText).text(oldText + eventText);
-            console.log(eventText, ' event text');
+            // console.log(eventText, ' event text');
         }
     }
 
